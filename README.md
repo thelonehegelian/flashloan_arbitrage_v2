@@ -6,6 +6,6 @@
 4. run `npx hardhat test`
 
 # What does it do?
-1. Gets a flashloan
-2. executes swap on uniswap
-3. reimburses the flashloan
+1. Gets a flashloan from AAVE
+2. Executes a single swap on uniswapV2
+3. Reimburses the flashloan
