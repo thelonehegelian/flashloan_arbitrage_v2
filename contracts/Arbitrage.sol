@@ -43,8 +43,6 @@ contract Arbitrage is FlashLoanReceiverBase, IArbitrageExecutor {
         address _tokenIn,
         address _tokenOut
     ) internal returns (uint256) {
-        // TODO: Use safeTransfer from TransferHelper library instead
-        // safeTranfer was not working for some reason so a temp solution here
         require(IERC20(_tokenIn).approve(UNISWAP_V2_ROUTER, _amountIn));
 
         address[] memory path = new address[](2);
@@ -77,19 +75,16 @@ contract Arbitrage is FlashLoanReceiverBase, IArbitrageExecutor {
         uint256[] calldata amounts,
         uint256[] calldata premiums, // premiums map to assets
         address initiator,
-        bytes calldata params
+        bytes calldata params // only making a single swap
     ) external override returns (bool) {
         // Funds have been received
         // make a swap on uniswap, weth for DAI
-        singleSwap(250, assets[0], DAI);
+        singleSwap(amounts[0], assets[0], DAI);
 
 
         // Approve the LendingPool contract allowance to *pull* the owed amount
         for (uint256 i = 0; i < assets.length; i++) {
             uint256 amountOwing = amounts[i] + premiums[i];
-        // console.log("Amount owed",amountOwing);
-        // console.log("You have this much left", IERC20(assets[0]).balanceOf(address(this)));
-
             IERC20(assets[i]).approve(address(LENDING_POOL), amountOwing);
         }
 
@@ -122,16 +117,16 @@ contract Arbitrage is FlashLoanReceiverBase, IArbitrageExecutor {
         );
     }
 
+    // @todo add param for making multiple swaps
     function flashloan(address _asset, uint256 amountIn) internal {
         
-        bytes memory data = "";
-        uint256 amount = amountIn;
+        // bytes memory data = "";
 
         address[] memory assets = new address[](1);
         assets[0] = _asset;
 
         uint256[] memory amounts = new uint256[](1);
-        amounts[0] = amount;
+        amounts[0] = amountIn;
 
         _flashloan(assets, amounts);
     }
