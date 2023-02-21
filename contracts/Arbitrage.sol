@@ -1,15 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 import "hardhat/console.sol";
-
 import {FlashLoanReceiverBase} from "./aave/FlashloanReceiverBase.sol";
 import {ILendingPool, ILendingPoolAddressesProvider} from "./interfaces/interfaces.sol";
-// import {SafeMath} from "./libraries/Libraries.sol";
-
-import "./interfaces/IUniswapV2Factory.sol";
-import "./interfaces/IUniswapV2Router02.sol";
+import {IUniswapV2Pair, IUniswapV2Router02} from "./interfaces/uniswapInterfaces.sol";
 import "./interfaces/IERC20.sol";
-import {IUniswapV2Pair} from "./interfaces/uniswapInterfaces.sol";
+
 import "./interfaces/IArbitrageExecutor.sol";
 
 contract Arbitrage is FlashLoanReceiverBase, IArbitrageExecutor {
