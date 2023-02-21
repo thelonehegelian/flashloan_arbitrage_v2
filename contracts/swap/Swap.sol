@@ -1,11 +1,8 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.0;
 import "hardhat/console.sol";
-
-import "../interfaces/IUniswapV2Factory.sol";
-import "../interfaces/IUniswapV2Router02.sol";
+import {IUniswapV2Router02, IUniswapV2Pair, IUniswapV2Factory} from "../interfaces/uniswapInterfaces.sol";
 import "../interfaces/IERC20.sol";
-import {IUniswapV2Pair} from "../interfaces/uniswapInterfaces.sol";
 
 contract Swap {
     address private constant DAI = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
