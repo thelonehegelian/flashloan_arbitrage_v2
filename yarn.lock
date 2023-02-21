@@ -4999,6 +4999,11 @@ hardhat-gas-reporter@^1.0.4:
     eth-gas-reporter "^0.2.24"
     sha1 "^1.1.1"
 
+hardhat-nodemon@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/hardhat-nodemon/-/hardhat-nodemon-1.1.0.tgz#e9546861a22b18d6236946e304a373514f9bccae"
+  integrity sha512-B+sscI48Iv9V7MxZtJhmnlI4vsuirnE+V5Hg/3Qep14tovCgn7kaJ2gZwpTCexVFNSq2WzwyWwJMwu4EjGcluA==
+
 hardhat@^2.9.3:
   version "2.9.3"
   resolved "https://registry.yarnpkg.com/hardhat/-/hardhat-2.9.3.tgz#4759dc3c468c7d15f34334ca1be7d59b04e47b1e"
