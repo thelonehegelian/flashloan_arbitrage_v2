@@ -1,14 +1,5 @@
 // SPDX-License-Identifier: agpl-3.0
-pragma solidity ^0.6.12;
-pragma experimental ABIEncoderV2;
-
-import {DataTypes} from "../libraries/Libraries.sol";
-
-// interface IArbitrage {
-//     function store(uint256 num) external;
-
-//     function retrieve() external view returns (uint256);
-// }
+pragma solidity ^0.8.0;
 
 interface IFlashloan {
     function flashloan(address _asset) external view;

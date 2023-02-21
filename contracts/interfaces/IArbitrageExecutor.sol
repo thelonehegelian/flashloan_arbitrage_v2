@@ -1,10 +1,11 @@
 //SPDX-License-Identifier: Unlicense
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 
-interface IPulsarArbitrage {
+interface IArbitrageExecutor {
     function executeArbitrage(
         address fromToken,
         uint256 amountIn,
         address[] calldata pools
     ) external returns (uint256);
 }
+

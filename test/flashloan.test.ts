@@ -1,25 +1,24 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
-// import {PulsarArbitrage} from '../typechain-types';
 
 const ADDRESSES_PROVIDER = "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5";
 const UNISWAP_V2_ROUTER = "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D";
 // const UNISWAP_V2_FACTORY ="0x5C69bEe701ef814a2B6a3EDD4B1652CB9cc5aA6f";
 const WETH9 = "0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2";
 
-describe("PulsarArbitrage", function () {
-  it("Deploys the Pulsar contract and executes arbitrage", async function () {
+describe("Arbitrage", function () {
+  it("Deploys the Arbitrage contract and executes arbitrage", async function () {
     // get signers
     const [owner] = await ethers.getSigners();
 
     // Deploy the PulsarArbitrage contract
-    const PulsarArbitrage = await ethers.getContractFactory("PulsarArbitrage");
-    const pulsarArbitrage = await PulsarArbitrage.deploy(
+    const Arbitrage = await ethers.getContractFactory("Arbitrage");
+    const arbitrage = await Arbitrage.deploy(
       ADDRESSES_PROVIDER,
       UNISWAP_V2_ROUTER
     );
-    await pulsarArbitrage.deployed();
-    expect(pulsarArbitrage.address).to.not.be.null;
+    await arbitrage.deployed();
+    expect(arbitrage.address).to.not.be.null;
     // get weth
     const weth = await ethers.getContractAt("IWETH", WETH9);
     // get some weth
@@ -30,8 +29,8 @@ describe("PulsarArbitrage", function () {
     // deposit weth to flashloan contract
     await weth
       .connect(owner)
-      .transfer(pulsarArbitrage.address, ethers.utils.parseEther(amountIn));
-    expect(await weth.balanceOf(pulsarArbitrage.address)).to.equal(
+      .transfer(arbitrage.address, ethers.utils.parseEther(amountIn));
+    expect(await weth.balanceOf(arbitrage.address)).to.equal(
       ethers.utils.parseEther(amountIn)
     );
 
@@ -46,7 +45,7 @@ describe("PulsarArbitrage", function () {
     expect(poolsArray.length).to.equal(1);
 
     // pass the pairs to the executeArbitrage() function
-    await pulsarArbitrage
+    await arbitrage
       .connect(owner)
       .executeArbitrage(WETH9, ethers.utils.parseEther("0.5"), poolsArray);
 

@@ -1,15 +1,13 @@
 // SPDX-License-Identifier: GPL-2.0-or-later
-pragma solidity 0.6.12;
+pragma solidity ^0.8.0;
 import "hardhat/console.sol";
 
 import "../interfaces/IUniswapV2Factory.sol";
 import "../interfaces/IUniswapV2Router02.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "../interfaces/IERC20.sol";
 import {IUniswapV2Pair} from "../interfaces/uniswapInterfaces.sol";
-import {SafeMath} from "../libraries/Libraries.sol";
 
 contract Swap {
-    using SafeMath for uint256;
     address private constant DAI = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
     address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
 
