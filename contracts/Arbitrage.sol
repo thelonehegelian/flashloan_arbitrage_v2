@@ -5,15 +5,16 @@ import {FlashLoanReceiverBase} from "./aave/FlashloanReceiverBase.sol";
 import {ILendingPool, ILendingPoolAddressesProvider} from "./interfaces/interfaces.sol";
 import {IUniswapV2Pair, IUniswapV2Router02} from "./interfaces/uniswapInterfaces.sol";
 import "./interfaces/IERC20.sol";
-
 import "./interfaces/IArbitrageExecutor.sol";
 
 contract Arbitrage is FlashLoanReceiverBase, IArbitrageExecutor {
 
+    // @todo move to constructor
     address private constant DAI = 0x6B175474E89094C44Da98b954EedeAC495271d0F;
     address private constant WETH = 0xC02aaA39b223FE8D0A0e5C4F27eAD9083C756Cc2;
-    address public UNISWAP_V2_ROUTER; 
+    address private UNISWAP_V2_ROUTER; 
     address private owner;
+
 
     constructor(address _addressProvider, address uniSwap)
         FlashLoanReceiverBase(_addressProvider)
@@ -38,6 +39,8 @@ contract Arbitrage is FlashLoanReceiverBase, IArbitrageExecutor {
         return IERC20(WETH).balanceOf(address(this));
     }
 
+
+    // @todo implement Swap interface for this
     function singleSwap(
         uint256 _amountIn,
         address _tokenIn,

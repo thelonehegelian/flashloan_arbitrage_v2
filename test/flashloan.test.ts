@@ -11,7 +11,7 @@ describe("Arbitrage", function () {
     // get signers
     const [owner] = await ethers.getSigners();
 
-    // Deploy the PulsarArbitrage contract
+    // Deploy the Arbitrage contract
     const Arbitrage = await ethers.getContractFactory("Arbitrage");
     const arbitrage = await Arbitrage.deploy(
       ADDRESSES_PROVIDER,
